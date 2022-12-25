@@ -22,10 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "timer.h"
-#include "uart.h"
-#include "fsm_parser.h"
-#include "fsm_communication.h"
+#include "global.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,11 +40,11 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-//ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc1;
 
 TIM_HandleTypeDef htim2;
 
-//UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
@@ -65,7 +62,15 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (huart->Instance == USART2) {
+		HAL_UART_Transmit(&huart2, &temp, 1, 50);
+		buffer[buffer_index++] = temp;
+		buffer_index %= MAX_BUFFER_SIZE;
+		buffer_flag = 1;
+		HAL_UART_Receive_IT(&huart2, &temp, 1);
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -101,6 +106,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_UART_Receive_IT(&huart2, &temp, 1);
 //  HAL_ADC_Start(&hadc1);
   /* USER CODE END 2 */
 
@@ -120,7 +126,7 @@ int main(void)
 		  command_parser_fsm();
 		  buffer_flag = 0;
 	  }
-	  uart_communication_fsm();
+	  uart_communication_fsm(huart2, hadc1);
 
     /* USER CODE END WHILE */
 

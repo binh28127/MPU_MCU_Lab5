@@ -1,6 +1,6 @@
 Core/Src/fsm_communication.o: ../Core/Src/fsm_communication.c \
- ../Core/Inc/fsm_communication.h ../Core/Inc/timer.h ../Core/Inc/uart.h \
- ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ ../Core/Inc/fsm_communication.h ../Core/Inc/global.h ../Core/Inc/main.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
@@ -27,13 +27,12 @@ Core/Src/fsm_communication.o: ../Core/Src/fsm_communication.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/fsm_parser.h
+ ../Core/Inc/timer.h ../Core/Inc/fsm_parser.h \
+ ../Core/Inc/fsm_communication.h
 
 ../Core/Inc/fsm_communication.h:
 
-../Core/Inc/timer.h:
-
-../Core/Inc/uart.h:
+../Core/Inc/global.h:
 
 ../Core/Inc/main.h:
 
@@ -91,4 +90,8 @@ Core/Src/fsm_communication.o: ../Core/Src/fsm_communication.c \
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
+../Core/Inc/timer.h:
+
 ../Core/Inc/fsm_parser.h:
+
+../Core/Inc/fsm_communication.h:
