@@ -11,7 +11,7 @@ void command_parser_fsm() {
 			if (temp == '!') {
 				status = MESS_READING;
 				command_index = 0;
-//				command_flag = 0;
+				command_flag = 0;
 			}
 			break;
 
